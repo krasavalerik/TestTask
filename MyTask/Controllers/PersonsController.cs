@@ -17,11 +17,9 @@ namespace MyTask.Controllers
     public class PersonsController : ControllerBase
     {
         private IRepository<Person> _repository;
-        private readonly ILogger<PersonsController> _logger;
 
-        public PersonsController(IRepository<Person> repository/*, ILogger<PersonsController> logger*/){
+        public PersonsController(IRepository<Person> repository){
             _repository = repository;
-            //_logger = logger;
         }
 
         // GET: api/<PersonsController>

@@ -15,11 +15,18 @@ namespace MyClassLibrary
         public long Add(Person person){
             _db.Persons.Add(person);
             _db.SaveChanges();
+
+            if (person.Skills.Count > 0){
+                foreach(var skill in person.Skills){
+                    _db.Skills.Add(skill);
+                    _db.SaveChanges();
+                }
+            }
             long count = _db.Persons.Count();
             return count;
         }
         public IEnumerable<Person> GetAll(){
-            return _db.Persons.ToArray();
+            return _db.Persons.Include(p => p.Skills).ToArray();
         }
         public Person Find(int id){
             return _db.Persons.Include(p => p.Skills).FirstOrDefault(p => p.Id == id);
@@ -33,7 +40,7 @@ namespace MyClassLibrary
         public Person Update(int id, Person itm){
             Person person = _db.Persons.Include(s => s.Skills).FirstOrDefault(p => p.Id == id);
             if (person == null)
-                return null;
+                return person;
 
             person.Name = itm.Name;
             person.DisplayName = itm.DisplayName;

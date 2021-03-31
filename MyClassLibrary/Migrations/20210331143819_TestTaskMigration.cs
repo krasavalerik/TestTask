@@ -28,24 +28,23 @@ namespace MyClassLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Level = table.Column<byte>(type: "tinyint", nullable: false),
-                    PersonId = table.Column<int>(type: "int", nullable: false),
-                    PersonId1 = table.Column<long>(type: "bigint", nullable: true)
+                    PersonId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Skills_Persons_PersonId1",
-                        column: x => x.PersonId1,
+                        name: "FK_Skills_Persons_PersonId",
+                        column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Skills_PersonId1",
+                name: "IX_Skills_PersonId",
                 table: "Skills",
-                column: "PersonId1");
+                column: "PersonId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -79,51 +79,5 @@ namespace UnitTestApp
             Assert.NotNull(act);
             Assert.IsType<Person>(act);
         }
-
-        [Fact]
-        public void MyTest()
-        {
-            int id = 5;
-            var ob = new DbContextOptionsBuilder<ApplicationContext>();
-            var op = ob.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=testdb1;Trusted_Connection=True;").Options;
-            ApplicationContext applicationContext = new ApplicationContext(op);
-            Repositiry arrange = new Repositiry(applicationContext);
-
-            Person p = new Person() { Name = "a", DisplayName = "a" };
-            Person p1 = new Person() { Name = "bbb", DisplayName = "b" };
-            Person p2 = new Person() { Name = "ccc", DisplayName = "c" };
-
-            Skill skill = new Skill() { Name = "a", Level = 1, Person = p };
-            Skill skill1 = new Skill() { Name = "b", Level = 2, PersonId = 6 };
-            Skill skill2 = new Skill() { Name = "c", Level = 3, PersonId = 6 };
-
-            Person per = arrange.Find(6);
-            List<Skill> skills = per.Skills.ToList();
-            string s = skills[0].Name;
-
-            //HashSet<Skill> skills = (HashSet<Skill>)per.Skills;
-            //string s = skills.First(s => s.Id == 9).Name;
-            //string s1 = skills.First(s => s.Id == 10).Name;
-            //Person per1 = skills.First(s => s.Id == 9).Person;
-            //Person per2 = skills.First(s => s.Person.Equals(per)).Person;
-
-            //arrange.Remove(5);
-            //arrange.Add(p1);
-            ///var act = arrange.GetAll();
-            //var act = arrange.Remove(id);
-            //arrange.ads();
-
-            //Assert.NotNull(per);
-            //Assert.True(per.Name.Equals("bbb"));
-            //Assert.True(per.Skills.Count == 0);
-            //Assert.NotNull(act);
-            //Assert.IsType<Skill[]>(act);
-
-            //Assert.NotNull(skills);
-            Assert.True(s.Equals("b"));
-            //Assert.True(s1.Equals("c"));
-            Assert.True(skills.Count == 2);
-            //Assert.True(per.Equals(per1) && per.Equals(per2));
-        }
     }
 }
