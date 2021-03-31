@@ -2,7 +2,7 @@
 
 namespace MyClassLibrary.Migrations
 {
-    public partial class AddPersonsMigration : Migration
+    public partial class TestTaskMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,7 @@ namespace MyClassLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Level = table.Column<byte>(type: "tinyint", nullable: false),
-                    PersonId = table.Column<long>(type: "bigint", nullable: true)
+                    PersonId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,7 +38,7 @@ namespace MyClassLibrary.Migrations
                         column: x => x.PersonId,
                         principalTable: "Persons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

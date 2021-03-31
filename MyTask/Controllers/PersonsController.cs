@@ -17,12 +17,9 @@ namespace MyTask.Controllers
     public class PersonsController : ControllerBase
     {
         private IRepository<Person> _repository;
-        private readonly ILogger<PersonsController> _logger;
 
-        public PersonsController(ApplicationContext applicationContext, ILogger<PersonsController> logger){
-            _repository = new Repositiry(applicationContext);
-            _logger = logger;
-            //_repository.Add(new Person { Name = "aaa", DisplayName = "bbb" });
+        public PersonsController(IRepository<Person> repository){
+            _repository = repository;
         }
 
         // GET: api/<PersonsController>
