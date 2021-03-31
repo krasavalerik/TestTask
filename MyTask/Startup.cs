@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyClassLibrary.Models;
+using MyClassLibrary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using MyTask.Controllers;
@@ -34,6 +35,7 @@ namespace MyTask
             string connection = Configuration.GetConnectionString("DefaultConnection");
             // добавляем контекст данных в качестве сервиса в приложение
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+            services.AddScoped<IRepository<Person>, Repositiry>();
             //services.AddControllersWithViews();
 
             services.AddControllers();

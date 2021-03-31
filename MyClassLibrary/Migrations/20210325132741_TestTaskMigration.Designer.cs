@@ -10,8 +10,8 @@ using MyClassLibrary.Models;
 namespace MyClassLibrary.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210320113932_AddPersonsMigration")]
-    partial class AddPersonsMigration
+    [Migration("20210325132741_TestTaskMigration")]
+    partial class TestTaskMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,21 +52,26 @@ namespace MyClassLibrary.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("PersonId1")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("PersonId1");
 
                     b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("MyClassLibrary.Models.Skill", b =>
                 {
-                    b.HasOne("MyClassLibrary.Models.Person", null)
+                    b.HasOne("MyClassLibrary.Models.Person", "Person")
                         .WithMany("Skills")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId1");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("MyClassLibrary.Models.Person", b =>

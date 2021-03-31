@@ -2,7 +2,7 @@
 
 namespace MyClassLibrary.Migrations
 {
-    public partial class AddPersonsMigration : Migration
+    public partial class TestTaskMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,23 +28,24 @@ namespace MyClassLibrary.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Level = table.Column<byte>(type: "tinyint", nullable: false),
-                    PersonId = table.Column<long>(type: "bigint", nullable: true)
+                    PersonId = table.Column<int>(type: "int", nullable: false),
+                    PersonId1 = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Skills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Skills_Persons_PersonId",
-                        column: x => x.PersonId,
+                        name: "FK_Skills_Persons_PersonId1",
+                        column: x => x.PersonId1,
                         principalTable: "Persons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Skills_PersonId",
+                name: "IX_Skills_PersonId1",
                 table: "Skills",
-                column: "PersonId");
+                column: "PersonId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

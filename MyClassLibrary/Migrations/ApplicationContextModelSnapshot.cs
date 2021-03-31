@@ -50,21 +50,26 @@ namespace MyClassLibrary.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("PersonId")
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("PersonId1")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("PersonId1");
 
                     b.ToTable("Skills");
                 });
 
             modelBuilder.Entity("MyClassLibrary.Models.Skill", b =>
                 {
-                    b.HasOne("MyClassLibrary.Models.Person", null)
+                    b.HasOne("MyClassLibrary.Models.Person", "Person")
                         .WithMany("Skills")
-                        .HasForeignKey("PersonId");
+                        .HasForeignKey("PersonId1");
+
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("MyClassLibrary.Models.Person", b =>
